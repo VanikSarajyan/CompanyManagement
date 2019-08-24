@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h1>Companies</h1><br>
-    <table class="table">
+    <table class="table table-hover">
         <thead>
             <th>Logo</th>
             <th>Name</th>
@@ -14,7 +14,7 @@
         <tbody>
             @foreach ($companies as $company)
                 <tr>
-                    <td>{{$company->logo }}</td>
+                    <td><img src="/storage/logos/{{$company->logo }}" width="200px" height="50px" /></td>
                     <td>{{$company->name }}</td>
                     <td>{{$company->email }}</td>
                     <td>{{$company->website }}</td>
@@ -75,8 +75,7 @@
                         </div>
                         <div class="form-group">
                             <label for="logo">Logo</label>
-                            {{-- <input type="file" class="form-control-file" name="logo" required> --}}
-                            <input type="text" class="form-control" name="logo" required>
+                            <input type="file" class="form-control-file" name="logo" required>
                             @error('logo')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

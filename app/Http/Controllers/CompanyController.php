@@ -38,8 +38,16 @@ class CompanyController extends Controller
      */
     public function store(StoreCompany $request)
     {
-        $validated = $request->validated();
-        Company::create($validated);
+        $validated = $request->validated(); 
+
+        $fullFileName = $request->file('logo')->getClientOriginalName();
+        $fileName = pathinfo($fullFileName, PATHINFO_FILENAME);
+        $extension = $request->file('logo')->getClientOriginalExtension();
+        $fileNameToStore = $fileName.'_'.time().'.'.$extension;
+
+        $request->file('logo')->storeAs('public/logos', $fileNameToStore);
+
+        Company::create(array_merge($validated, ['logo' => $fileNameToStore]));
         return redirect('/companies');
     }
 
