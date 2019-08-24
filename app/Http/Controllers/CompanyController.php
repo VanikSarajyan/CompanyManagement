@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Company;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreCompany;
 
 class CompanyController extends Controller
 {
@@ -14,7 +15,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $companies = Company::all();
+        $companies = Company::paginate(10);
 
         return view('company.index', compact('companies'));
     }
@@ -35,9 +36,11 @@ class CompanyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCompany $request)
     {
-        
+        $validated = $request->validated();
+        Company::create($validated);
+        return redirect('/companies');
     }
 
     /**
