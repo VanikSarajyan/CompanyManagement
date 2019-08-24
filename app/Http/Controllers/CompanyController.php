@@ -15,7 +15,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $companies = Company::paginate(10);
+        $companies = Company::paginate(5);
 
         return view('company.index', compact('companies'));
     }
@@ -59,7 +59,8 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        //
+        $employees = $company->employees()->paginate(5);
+        return view('company.show', compact('company', 'employees'));
     }
 
     /**

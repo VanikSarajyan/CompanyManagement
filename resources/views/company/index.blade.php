@@ -2,22 +2,24 @@
 
 @section('content')
 <div class="container">
-    <h1>Companies</h1><br>
+    <h1>Companies</h1>
     <table class="table table-hover">
-        <thead>
-            <th>Logo</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Website</th>
-            <th colspan="2">Actions</th>
+        <thead class="thead-dark">
+            <tr>
+                <th>Logo</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Website</th>
+                <th colspan="2">Actions</th>
+            </tr>
         </thead>
         <tbody>
             @foreach ($companies as $company)
                 <tr>
-                    <td><img src="/storage/logos/{{$company->logo }}" width="200px" height="50px" /></td>
-                    <td>{{$company->name }}</td>
-                    <td>{{$company->email }}</td>
-                    <td>{{$company->website }}</td>
+                    <td><a href="/companies/{{ $company->id }}"><img src="/storage/logos/{{$company->logo }}" width="200px" height="50px" /></a></td>
+                    <td><a href="/companies/{{ $company->id }}" class="text-dark"><strong>{{ $company->name }}</strong></a></td>
+                    <td>{{ $company->email }}</td>
+                    <td>{{ $company->website }}</td>
                     <td>
                         <button class="btn btn-primary mr-2" data-toggle="modal" data-target="#updateModal">Uptade</button>
                         <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
@@ -26,12 +28,14 @@
             @endforeach
         </tbody>
     </table>
-    <br><br><br>
+    <br><br>
     <div class="row d-flex justify-content-center">
         {{ $companies->links() }}
     </div>
 
-    <button class="btn btn-success" data-toggle="modal" data-target="#createModal">Create Company</button>
+    <div class="row d-flex flex-row-reverse">
+        <button class="btn btn-success" data-toggle="modal" data-target="#createModal">Create Company</button>
+    </div>
 
     <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
