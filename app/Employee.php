@@ -9,4 +9,9 @@ class Employee extends Model
     protected $guarded = [];
 
     public $timestamps = false;
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
 }
