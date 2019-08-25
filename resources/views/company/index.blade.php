@@ -16,7 +16,7 @@
         <tbody>
             @foreach ($companies as $company)
                 <tr>
-                    <td><a href="/companies/{{ $company->id }}"><img src="/storage/logos/{{$company->logo }}" width="200px" height="50px" /></a></td>
+                    <td><a href="/companies/{{ $company->id }}"><img src="/storage/logos/{{$company->logo }}" width="180px" height="50px" /></a></td>
                     <td><a href="/companies/{{ $company->id }}" class="text-dark"><strong>{{ $company->name }}</strong></a></td>
                     <td>{{ $company->email }}</td>
                     <td>{{ $company->website }}</td>
@@ -147,8 +147,9 @@
                 </div>
                 <div class="modal-body">
                     <p>Are you sure you want to delete this company?</p>
-                    <form action="/companies/id" enctype="multipart/form-data" method="POST">
+                    <form action="/companies/5" enctype="multipart/form-data" method="POST">
                         @csrf 
+                        @method('DELETE')
                         <div class="d-flex flex-row-reverse">
                             <button type="button" class="btn btn-default mx-1" data-dismiss="modal">Close</button>
                             <input type="submit" value="Delete" class="btn btn-danger">

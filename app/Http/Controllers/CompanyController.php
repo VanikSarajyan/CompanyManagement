@@ -94,6 +94,8 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        //
+        unlink(public_path('storage/logos/'.$company->logo));
+        $company->delete();
+        return redirect('/companies');
     }
 }
