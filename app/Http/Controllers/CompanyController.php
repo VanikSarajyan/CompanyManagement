@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Company;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreCompany;
+use App\Http\Requests\UpdateCompany;
 
 class CompanyController extends Controller
 {
@@ -81,9 +82,23 @@ class CompanyController extends Controller
      * @param  \App\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Company $company)
+    public function update(UpdateCompany $request, Company $company)
     {
-        //
+        $validated = $request->validated();
+        
+        if(request('logo')){
+            $fullFileName = $request->file('logo')->getClientOriginalName();
+            $fileName = pathinfo($fullFileName, PATHINFO_FILENAME);
+            $extension = $request->file('logo')->getClientOriginalExtension();
+            $fileNameToStore = $fileName.'_'.time().'.'.$extension;
+    
+            $request->file('logo')->storeAs('public/logos', $fileNameToStore);
+            $logoArray = ['logo' => $fileNameToStore];
+        }
+
+        $company->update(array_merge($validated, $logoArray ?? []));
+
+        return redirect('/companies');
     }
 
     /**
