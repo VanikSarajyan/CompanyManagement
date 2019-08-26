@@ -3,6 +3,7 @@
 @section('content')
 <div class="container">
     <h1>Companies</h1>
+    @if ($companies->count() > 0)
     <table class="table table-hover">
         <thead class="thead-dark">
             <tr>
@@ -48,7 +49,9 @@
     <div class="row d-flex justify-content-center">
         {{ $companies->links() }}
     </div>
-
+    @else 
+    <h4>There are no companies.</h4>
+    @endif
     <div class="row d-flex flex-row-reverse">
         <button class="btn btn-success" data-toggle="modal" data-target="#createCompanyModal">Create Company</button>
     </div>
