@@ -49,7 +49,7 @@ class CompanyController extends Controller
         $request->file('logo')->storeAs('public/logos', $fileNameToStore);
 
         Company::create(array_merge($validated, ['logo' => $fileNameToStore]));
-        return redirect('/companies');
+        return redirect('/companies')->with('success', 'Company created successfully!');
     }
 
     /**
@@ -98,7 +98,7 @@ class CompanyController extends Controller
 
         $company->update(array_merge($validated, $logoArray ?? []));
 
-        return redirect('/companies');
+        return redirect('/companies')->with('success', 'Company updated successfully!');
     }
 
     /**
@@ -111,6 +111,6 @@ class CompanyController extends Controller
     {
         unlink(public_path('storage/logos/'.$company->logo));
         $company->delete();
-        return redirect('/companies');
+        return redirect('/companies')->with('success', 'Company deleted successfully!');
     }
 }
