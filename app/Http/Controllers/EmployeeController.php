@@ -38,7 +38,7 @@ class EmployeeController extends Controller
     {
         $validated = $request->validated();
         $employee = Employee::create($validated);
-        return redirect("/companies/{$employee->company->id}");
+        return redirect("/companies/{$employee->company->id}")->with('success', 'Employee created successfully!');
 
     }
 
@@ -84,6 +84,8 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
-        //
+        $company_id = $employee->company->id;
+        $employee->delete();
+        return redirect("/companies/{$company_id}")->with('success', 'Employee deleted successfully!');
     }
 }

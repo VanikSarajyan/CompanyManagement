@@ -25,7 +25,7 @@ class UpdateCompany extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', Rule::unique('companies')->ignore($this->company->id, 'id'), 'max:128'],
+            'name' => ['required', Rule::unique('companies')->ignore($this->company->id, 'id'), 'max:64'],
             'email' =>['required', 'email', Rule::unique('companies')->ignore($this->company->id, 'id'), 'max:128'],
             'logo' => 'nullable|image|max:1999',
             'website' => 'required'

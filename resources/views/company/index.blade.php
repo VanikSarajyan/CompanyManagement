@@ -174,5 +174,5 @@
             $('#companyUpdateForm').attr("action", "{{ url('/companies') }}" + "/" + button.data('id'));
         });
     })
-    </script>
+</script>
 @endsection

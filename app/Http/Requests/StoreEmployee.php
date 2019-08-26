@@ -24,10 +24,11 @@ class StoreEmployee extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => 'required|max:128',
-            'last_name' => 'required|max:128',
-            'email' => 'required|unique:companies|max:255',
-            'phone' => 'required|max:128'
+            'first_name' => 'required|max:64',
+            'last_name' => 'required|max:64',
+            'email' => 'required|unique:companies|max:128',
+            'phone' => 'required|max:20',
+            'company_id' => 'required'
         ];
     }
 }
