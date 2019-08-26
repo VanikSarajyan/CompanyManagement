@@ -19,5 +19,5 @@ Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::resource('companies', 'CompanyController')->middleware('auth');
+Route::resource('companies', 'CompanyController')->except(['create', 'edit'])->middleware('auth');
 Route::resource('employees', 'EmployeeController')->middleware('auth');
