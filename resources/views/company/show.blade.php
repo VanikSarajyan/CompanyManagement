@@ -32,7 +32,17 @@
                         <td>{{ $employee->email }}</td>
                         <td>{{ $employee->phone }}</td>
                         <td>
-                            <button class="btn btn-primary">Update</button>
+                            <button 
+                                class="btn btn-primary mr-2" 
+                                data-toggle="modal" 
+                                data-target="#updateEmployeeModal"
+                                data-id={{ $employee->id }}
+                                data-fname="{{ $employee->first_name }}"
+                                data-lname="{{ $employee->last_name }}"
+                                data-email="{{ $employee->email }}"
+                                data-phone="{{ $employee->phone }}">
+                                Uptade
+                            </button>
                             <button 
                                 class="btn btn-danger" 
                                 data-toggle="modal" 
@@ -89,13 +99,55 @@
                         </div>
                         <div class="d-flex flex-row-reverse">
                             <button type="button" class="btn btn-default mx-1" data-dismiss="modal">Close</button>
-                            <input type="submit" value="Create" class="btn btn-success">
+                            <input type="submit" value="Add" class="btn btn-success">
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="updateEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update Company</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="employeeUpdateForm" action="/employees/id" enctype="multipart/form-data" method="POST">
+                        @csrf
+
+                        <input type="hidden" name="_method" value="PUT">
+                        <input type="hidden" name="company_id" value="{{ $company->id }}">
+                        <div class="form-group">
+                            <label for="first_name">First Name</label>
+                            <input type="text" class="form-control" id="employeeFirstName" name="first_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="last_name">Last Name</label>
+                            <input type="text" class="form-control" id="employeeLastName" name="last_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input type="email" class="form-control" id="employeeEmail" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="website">Phone Number</label>
+                            <input type="text" class="form-control" id="employeePhone" name="phone" required>
+                        </div>
+                        <div class="d-flex flex-row-reverse">
+                            <button type="button" class="btn btn-default mx-1" data-dismiss="modal">Close</button>
+                            <input type="submit" value="Update" class="btn btn-primary">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 
     <div class="modal fade" id="deleteEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -131,13 +183,14 @@
             $('#employeeDeleteForm').attr("action", "{{ url('/employees') }}" + "/" + id);
         });
 
-        // $('#updateCompanyModal').on('show.bs.modal', function (event) {
-        //     let button = $(event.relatedTarget);
-        //     $('#companyName').val(button.data('name'));
-        //     $('#companyEmail').val(button.data('email'));
-        //     $('#companyWebsite').val(button.data('website'));
-        //     $('#companyUpdateForm').attr("action", "{{ url('/companies') }}" + "/" + button.data('id'));
-        // });
+        $('#updateEmployeeModal').on('show.bs.modal', function (event) {
+            let button = $(event.relatedTarget);
+            $('#employeeFirstName').val(button.data('fname'));
+            $('#employeeLastName').val(button.data('lname'));
+            $('#employeeEmail').val(button.data('email'));
+            $('#employeePhone').val(button.data('phone'));
+            $('#employeeUpdateForm').attr("action", "{{ url('/employees') }}" + "/" + button.data('id'));
+        });
     })
 </script>
 @endsection

@@ -20,4 +20,4 @@ Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::resource('companies', 'CompanyController')->except(['create', 'edit'])->middleware('auth');
-Route::resource('employees', 'EmployeeController')->middleware('auth');
+Route::resource('employees', 'EmployeeController')->only(['store', 'update', 'destroy'])->middleware('auth');
