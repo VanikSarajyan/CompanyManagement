@@ -53,38 +53,18 @@
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" class="form-control" name="name" required>
-                            @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="email">Email address</label>
                             <input type="email" class="form-control" name="email" required>
-                            @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="website">Website</label>
                             <input type="text" class="form-control" name="website" required>
-                            @error('website')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="logo">Logo</label>
                             <input type="file" class="form-control-file" name="logo" required>
-                            @error('logo')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
                         <div class="d-flex flex-row-reverse">
                             <button type="button" class="btn btn-default mx-1" data-dismiss="modal">Close</button>

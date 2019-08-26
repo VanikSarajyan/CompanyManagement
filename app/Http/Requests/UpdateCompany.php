@@ -27,7 +27,8 @@ class UpdateCompany extends FormRequest
             'name' => 'required|unique:companies|max:128',
             'email' => 'required|unique:companies|max:255',
             'logo' => 'nullable|image|max:1999',
-            'website' => 'required'
+            'website' => 'required',
+            'company_id' => 'required'
         ];
     }
 }

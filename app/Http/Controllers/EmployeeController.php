@@ -25,7 +25,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -36,7 +36,10 @@ class EmployeeController extends Controller
      */
     public function store(StoreEmployee $request)
     {
-        
+        $validated = $request->validated();
+        $employee = Employee::create($validated);
+        return redirect("/companies/{$employee->company->id}");
+
     }
 
     /**
