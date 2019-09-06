@@ -73,6 +73,7 @@ class CompanyController extends Controller
     
             $request->file('logo')->storeAs('public/logos', $fileNameToStore);
             $logoArray = ['logo' => $fileNameToStore];
+            unlink(public_path('storage/logos/'.$company->logo));
         }
 
         $company->update(array_merge($validated, $logoArray ?? []));
